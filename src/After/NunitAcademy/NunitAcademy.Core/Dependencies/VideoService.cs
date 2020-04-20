@@ -7,14 +7,13 @@ namespace NunitAcademy.Core.Dependencies
 {
     public class VideoService
     {
-        public string ReadVideoTitle()
-        {
-            var str = File.ReadAllText("video.txt");
-            var video = JsonConvert.DeserializeObject<Video>(str);
+        public string ReadVideoTitle(IFileReader fileReader, String path)
+        {           
+            var video = fileReader.Read(path);
             if (video == null)
                 return "Error parsing the video.";
             return video.Title;
-        }        
+        }
     }
 
     public class Video
